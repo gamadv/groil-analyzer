@@ -68,7 +68,7 @@ yarn dev
 1. **Build and run the Docker containers:**
 
 ```bash
-docker-compose up --build
+docker compose up -d
 ```
 
 This command will start the NestJS application and PostgreSQL database in Docker containers.
