@@ -29,7 +29,7 @@ These instructions will get you a copy of the project up and running on your loc
 Create a `.env` file in the root directory of the project and populate it with the following variables:
 
 ```
-DATABASE_URL=postgresql://username:password@localhost:5432/nest-clean?schema=public
+DATABASE_URL=postgresql://postgres:docker@localhost:5432/nest-clean?schema=public
 PORT=3030
 ```
 
