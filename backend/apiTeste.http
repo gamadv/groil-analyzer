@@ -1,0 +1,85 @@
+@baseUrl = http://localhost:3030
+
+# @name create_equipment
+POST {{baseUrl}}/equipments
+Content-Type: application/json
+
+{
+   "equipmentId": "EQ-3043"
+}
+
+###
+# @name create_equipment_with_error
+POST {{baseUrl}}/equipments
+Content-Type: application/json
+
+{
+   "equipmentId": "04"
+}
+###
+# @name delete_equipment
+DELETE {{baseUrl}}/equipments/EQ-303
+
+###
+# @name get_equipments
+GET {{baseUrl}}/equipments
+
+###
+# @name get_equipments_by_id
+GET {{baseUrl}}/equipments/EQ-303
+
+###
+# @name create_reading
+POST {{baseUrl}}/sensor-readings
+Content-Type: application/json
+
+{
+   "equipmentId": "EQ-33333",
+   "value": 300.0
+}
+###
+# @name create_reading_without_value
+POST {{baseUrl}}/sensor-readings
+Content-Type: application/json
+
+{
+   "equipmentId": "EQ-303",
+   "timestamp": "2022-01-01T00:00:00Z"
+}
+###
+# @name create_reading_csv
+PATCH {{baseUrl}}/csv-sensor-readings
+Content-Type: multipart/form-data; boundary=---011000010111000001101001
+
+-----011000010111000001101001
+Content-Disposition: form-data; name="file"; filename="data-test.csv"
+Content-Type: text/csv
+
+< ./src/tests/data-test.csv
+-----011000010111000001101001--
+###
+# @name create_reading_csv_error
+PATCH {{baseUrl}}/csv-sensor-readings
+Content-Type: multipart/form-data; boundary=---011000010111000001101001
+
+-----011000010111000001101001
+Content-Disposition: form-data; name="file"; filename="data-test.csv"
+Content-Type: text/csv
+
+< ./src/tests/data-test-error.csv
+-----011000010111000001101001--
+###
+# @name create_reading_wrong_file
+PATCH {{baseUrl}}/csv-sensor-readings
+Content-Type: multipart/form-data; boundary=---011000010111000001101001
+
+-----011000010111000001101001
+Content-Disposition: form-data; name="file"; filename="data-test-wrong.csv"
+Content-Type: text/text
+
+< ./src/tests/data-test-wrong.txt
+-----011000010111000001101001--
+
+###
+# @name get_statistics
+GET {{baseUrl}}/statistics/equipment?equipmentId=EQ-3043
